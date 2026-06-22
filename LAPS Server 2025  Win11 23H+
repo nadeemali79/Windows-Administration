@@ -3,3 +3,12 @@ Update-LapsADSchema
 
 #Verify it succeeded:
 Get-ADObject -SearchBase (Get-ADRootDSE).schemaNamingContext -Filter "name -like 'ms-LAPS*'"
+
+#You should see objects like:
+#ms-LAPS-CurrentPasswordVersion
+#ms-LAPS-EncryptedDSRMPassword
+#ms-LAPS-EncryptedDSRMPasswordHistory
+#ms-LAPS-EncryptedPassword
+#ms-LAPS-EncryptedPasswordHistory
+#ms-LAPS-Password
+#ms-LAPS-PasswordExpirationTime
