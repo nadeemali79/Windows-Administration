@@ -17,7 +17,7 @@ Get-ADObject -SearchBase (Get-ADRootDSE).schemaNamingContext -Filter "name -like
 
 # Allow computers in the OU to write their own LAPS attributes
 Set-LapsADComputerSelfPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab"
-Set-LapsADComputerSelfPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab"
+Set-LapsADComputerSelfPermission -Identity "OU=LAPS-Pilot,OU=Servers,OU=ITKB,DC=itkb,DC=lab"
 
 # Allow a specific admin group to READ passwords
 Set-LapsADReadPasswordPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
