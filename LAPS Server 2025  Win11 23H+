@@ -12,3 +12,16 @@ Get-ADObject -SearchBase (Get-ADRootDSE).schemaNamingContext -Filter "name -like
 #ms-LAPS-EncryptedPasswordHistory
 #ms-LAPS-Password
 #ms-LAPS-PasswordExpirationTime
+
+#For Windows LAPS, create a security group called "IT-Helpdesk" and add the appropriate helpdesk staff as members of this group.
+
+# Allow computers in the OU to write their own LAPS attributes
+Set-LapsADComputerSelfPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab"
+Set-LapsADComputerSelfPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab"
+# Allow a specific admin group to READ passwords
+Set-LapsADReadPasswordPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
+Set-LapsADReadPasswordPermission -Identity "OU=LAPS-Pilot,OU=Servers,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
+
+# Allow a specific admin group to force-reset passwords
+Set-LapsADResetPasswordPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
+Set-LapsADResetPasswordPermission -Identity "OU=LAPS-Pilot,OU=Servers,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
