@@ -1,1 +1,5 @@
+# Extend the Active Directory Schema
+Update-LapsADSchema
 
+#Verify it succeeded:
+Get-ADObject -SearchBase (Get-ADRootDSE).schemaNamingContext -Filter "name -like 'ms-LAPS*'"
