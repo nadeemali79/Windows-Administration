@@ -26,3 +26,30 @@ Set-LapsADReadPasswordPermission -Identity "OU=LAPS-Pilot,OU=Servers,OU=ITKB,DC=
 # Allow a specific admin group to force-reset passwords
 Set-LapsADResetPasswordPermission -Identity "OU=LAPS-Pilot,OU=Workstations,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
 Set-LapsADResetPasswordPermission -Identity "OU=LAPS-Pilot,OU=Servers,OU=ITKB,DC=itkb,DC=lab" -AllowedPrincipals "ITKB\IT-Helpdesk"
+
+#Before retrying, confirm the group name is exactly right (case doesn't matter, but spelling/existence does):
+Get-ADGroup -Filter "Name -like 'IT-Helpdesk*'"
+
+#Install and get LAPS PowerShell module in Windows 11,
+Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0
+
+#Then verify the LAPS module it's available:
+Get-Module -ListAvailable -Name LAPS
+
+#You could also Import it, usually auto-loads, but if needed, run may run this command
+Import-Module LAPS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
